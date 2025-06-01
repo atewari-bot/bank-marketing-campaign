@@ -26,39 +26,39 @@ Goal is to predict if the client will subscribe (yes/no) to a bank product (long
 
 There are two main approaches for enterprises to promote products and/or services: through mass campaigns, targeting general indiscriminate public or directed marketing, targeting a specific set of contacts. Data from a Portuguese bank that used its own contact-center to do directed marketing campaigns.
 
-                                                    [Start Campaign]
-                                                          |
-                                                          v
-                                                    [Customer List (Database)]
-                                                          |
-                                                          v
-                                                    [Call Customer]
-                                                          |
-                                                          v
-                                                    [Is Contact Successful?] -- No --> [Log Attempt, End]
-                                                          |
-                                                          Yes
-                                                          |
-                                                          v
-                                                    [Ask About Long-Term Deposit]
-                                                          |
-                                                          v
-                                                    [Customer Response]
-                                                      |           |
-                                                      No          Yes
-                                                      |            |
-                                                    [Log Refusal]  [Proceed to Offer Details]
-                                                      |            |
-                                                      v            v
-                                                    [End]     [Accept Terms?] -- No --> [Log Rejection, End]
-                                                                    |
-                                                                    Yes
-                                                                    |
-                                                                    v
-                                                          [Create Deposit Account]
-                                                                    |
-                                                                    v
-                                                              [Log Success, End]
+                            [Start Campaign]
+                                  |
+                                  v
+                            [Customer List (Database)]
+                                  |
+                                  v
+                            [Call Customer]
+                                  |
+                                  v
+                            [Is Contact Successful?] -- No --> [Log Attempt, End]
+                                  |
+                                  Yes
+                                  |
+                                  v
+                            [Ask About Long-Term Deposit]
+                                  |
+                                  v
+                            [Customer Response]
+                              |           |
+                              No          Yes
+                              |            |
+                            [Log Refusal]  [Proceed to Offer Details]
+                              |            |
+                              v            v
+                            [End]     [Accept Terms?] -- No --> [Log Rejection, End]
+                                            |
+                                            Yes
+                                            |
+                                            v
+                                  [Create Deposit Account]
+                                            |
+                                            v
+                                      [Log Success, End]
 
 ## Data Understanding
 
