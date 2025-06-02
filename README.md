@@ -78,7 +78,7 @@ This is the first step of Exploratory Data Analysis (EDA)
 **Key Takeaways:** 
 * 52.38% of people with house loan accepted long term deposit.
 * 82.43% of people with personal loan accepted long term deposit.
-* May month of most successful month for long term deposit acceptance with 33.43% success.
+* May month was most successful month for long term deposit acceptance with 33.43% success.
 * Thursday and Monday were most successful days of the week for deposit acceptance with 20.94% and 20.67% success rate.
 
 <h>Distribution by Target (Deposit)<h>
@@ -92,10 +92,32 @@ This is the first step of Exploratory Data Analysis (EDA)
 ![Image](/images/feature_correlation_with_deposit.png)
 
 **Key Takeaways:** 
-* Top highly correlated features with target (deposit) are duration, poutcome_success, contact_cellular and month of march, september & october.
+* Top highly correlated features with target (deposit) are duration, poutcome_success, contact_cellular and months of march, september & october.
 
 <h>Distribution comparision for top correlated features<h>
 ![Image](/images/violin_chart_by_coef.png)
+
+**Key Takeaways:**
+
+* <b>Violin Chart - Duration:</b> This violin plot shows the distribution of the duration of the last contact in seconds.
+
+  * Shape of the Violin: The shape of the violin indicates the density of data points at different duration values. A wider section of the violin means there are more data points with durations in that range.
+  * Interpretation: You'll likely see a dense concentration of contacts at shorter durations, with the distribution tapering off as the duration increases. This suggests that most marketing calls were relatively short. Observing the shape can tell you if the duration data is skewed, has multiple peaks (modes), or is roughly symmetrical.
+
+* <b>Violin Chart - Previous Contact Outcome (poutcome_success):</b> This violin plot visualizes the distribution of the poutcome_success feature. This feature indicates whether the outcome of the previous marketing campaign for a client was a success (represented by a value, 1, after one-hot encoding).
+
+  * Shape of the Violin: Since this is a binary variable, the violin plot will show densities around the values representing "success" (i.e. 1) and other outcome (i.e. 0 for failure/nonexistent).
+  * Interpretation: The width of the violin at different points will show the proportion of clients who had a successful outcome in the previous campaign compared to others. A wider section at the "failure" value would indicate a higher frequency of unsuccessful previous outcomes in the dataset.
+
+* <b>Violin Chart - Previous Number of Contacts Count (previous):</b> This violin plot shows the distribution of the previous feature, which represents the number of contacts performed before the current campaign for a client.
+
+  * Shape of the Violin: This plot will show the density of clients based on how many times they were contacted in previous campaigns. You'll see a large density at a low number of previous contacts, with the density decreasing as the number of previous contacts increases.
+  * Interpretation: This plot helps understand how frequently clients in this dataset were targeted in prior campaigns. A heavy concentration at low values suggests that many clients were either new to the campaign or were not contacted extensively before.
+
+* <b>Violin Chart - Contact Type (contact_cellular):</b> This violin plot visualizes the distribution of the contact_cellular feature, which indicates if the last contact was made via cellular phone.
+
+  * Shape of the Violin: Similar to poutcome_success, this will show the density around the values representing "cellular" contact (i.e. 1) and "telephone" contact (i.e. 0).
+  * Interpretation: The relative width of the violin at the "cellular" value compared to the "telephone" value will directly illustrate the proportion of contacts made via cellular versus telephone in the dataset. A wider section at "cellular" means cellular contact was more frequent and successful in driving the positive outcome of the campaign.
 
 <h>Top 20 Features Heatmap with Target (Deposit)<h>
 ![Image](/images/heatmap_top20_coef.png)
