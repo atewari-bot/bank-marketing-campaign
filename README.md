@@ -172,7 +172,7 @@ This is the first step of Exploratory Data Analysis (EDA)
 | LogisticRegression | 10.953     | 0.910          | 0.915          | 0.705     | 0.428   | 0.533    | 0.909       | C=0.1, solver=liblinear, scaled with StandardScaler            |
 | DecisionTree       | 34.313     | 0.916          | 0.918          | 0.677     | 0.527   | 0.593    | 0.912       | max_depth=5, min_samples_leaf=4, scaled with StandardScaler    |
 | KNN                | 182.240    | 1.000          | 0.906          | 0.683     | 0.302   | 0.419    | 0.899       | n_neighbors=19, weights=distance, metric=euclidean, scaled     |
-| SVM                | 346.068    | 0.914          | 0.875          | 0.469     | 0.811   | 0.595    | 0.869       | C=1, gamma=auto, class_weight=balanced, probability=True       |
+| SVM                | 346.068    | 0.914          | 0.875          | 0.469     | 0.811   | 0.595    | 0.869       | C=5, gamma=auto, class_weight=balanced, probability=True       |
 
 <h>Improved LogisticRegression model performance metrics<h>
 ![Image](/images/lr_grid_metrics.png)
