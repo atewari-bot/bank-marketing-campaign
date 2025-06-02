@@ -172,7 +172,7 @@ This is the first step of Exploratory Data Analysis (EDA)
 | LogisticRegression | 10.953     | 0.910          | 0.915          | 0.705     | 0.428   | 0.533    | 0.909       | C=0.1, solver=liblinear, scaled with StandardScaler            |
 | DecisionTree       | 34.313     | 0.916          | 0.918          | 0.677     | 0.527   | 0.593    | 0.912       | max_depth=5, min_samples_leaf=4, scaled with StandardScaler    |
 | KNN                | 182.240    | 1.000          | 0.906          | 0.683     | 0.302   | 0.419    | 0.899       | n_neighbors=19, weights=distance, metric=euclidean, scaled     |
-| SVM                | 346.068    | 0.872          | 0.860          | 0.441     | 0.917   | 0.595    | 0.855       | C=1, gamma=auto, class_weight=balanced, probability=True       |
+| SVM                | 346.068    | 0.914          | 0.875          | 0.469     | 0.811   | 0.595    | 0.869       | C=1, gamma=auto, class_weight=balanced, probability=True       |
 
 <h>Improved LogisticRegression model performance metrics<h>
 ![Image](/images/lr_grid_metrics.png)
@@ -226,14 +226,16 @@ The updated model represents a dramatic shift in strategy:
 
 | **Metric**   | **Previous Score** | **Improved Score** | **Interpretation of Change**                                |
 |--------------|--------------------|--------------------|-------------------------------------------------------------|
-| Accuracy     | 0.90               | 0.86               | Decreased — fewer overall correct predictions               |
-| Recall       | 0.19               | 0.92               | Significant improvement — now detects most actual positives |
-| Precision    | 0.66               | 0.44               | Decreased — more false positives among predicted positives  |
+| Accuracy     | 0.90               | 0.88               | Slightly Decreased — fewer overall correct predictions      |
+| Recall       | 0.19               | 0.81               | Significant improvement — now detects most actual positives |
+| Precision    | 0.66               | 0.47               | Decreased — more false positives among predicted positives  |
 
 
 ## Next steps and Recommendations
 
 </b>Based on analysis and model metrcis, we learned that imbalanced dataset which is heavily weighted towards the unsuccessful marketing campaigns could not be used effectively to determine features which could provide best model performance. So, it raises below questions:
+
+![Image](/images/contact_barplot_for_acceptance.png)
 
 * Was the marketing campaign not executed effectively to have a balanced dataset?
 * There was a high score amongst the "Yes" for customers contacted via Cellular. So did Bank adopted other mode of customer reachout like text messages or Whatsapp messages?
