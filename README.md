@@ -232,3 +232,10 @@ The updated model represents a dramatic shift in strategy:
 
 
 ## Next steps and Recommendations
+
+</b>Based on analysis and model metrcis, we learned that imbalanced dataset which is heavily weighted towards the unsuccessful marketing campaigns could not be used effectively to determine features which could provide best model performance. So, it raises below questions:
+
+* Was the marketing campaign not executed effectively to have a balanced dataset?
+* There was a high score amongst the "Yes" for customers contacted via Cellular. So did Bank adopted other mode of customer reachout like text messages or Whatsapp messages?
+* We observed high score for customer with longer duration of contact. Did bank employed sufficient resources to improve the changes of succesful outcome?
+</b>
