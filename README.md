@@ -22,7 +22,7 @@ Goal is to predict if the client will subscribe (yes/no) to a bank product (long
 
 ## Business Understanding
 
-There are two main approaches for enterprises to promote products and/or services: through mass campaigns, targeting general indiscriminate public or directed marketing, targeting a specific set of contacts. Data from a Portuguese bank that used its own contact-center to do directed marketing campaigns.
+There are two main approaches for enterprises to promote products and/or services: through mass campaigns, targeting general indiscriminate public or directed marketing, targeting a specific set of contacts. Data is from a Portuguese bank that used its own contact-center to do directed marketing campaigns.
 
                             [Start Campaign]
                                   |
@@ -167,12 +167,12 @@ This is the first step of Exploratory Data Analysis (EDA)
 
 ## Improving the Model
 
-| Model              | Train Time | Train Accuracy | Test Accuracy | Precision | Recall  | F1 Score | Best Score | Best Params (summary)                                         |
-|--------------------|------------|----------------|----------------|-----------|---------|----------|-------------|----------------------------------------------------------------|
-| LogisticRegression | 10.953     | 0.910          | 0.915          | 0.705     | 0.428   | 0.533    | 0.909       | C=0.1, solver=liblinear, scaled with StandardScaler            |
-| DecisionTree       | 34.313     | 0.916          | 0.918          | 0.677     | 0.527   | 0.593    | 0.912       | max_depth=5, min_samples_leaf=4, scaled with StandardScaler    |
-| KNN                | 182.240    | 1.000          | 0.906          | 0.683     | 0.302   | 0.419    | 0.899       | n_neighbors=19, weights=distance, metric=euclidean, scaled     |
-| SVM                | 346.068    | 0.914          | 0.875          | 0.469     | 0.811   | 0.595    | 0.869       | C=5, gamma=auto, class_weight=balanced, probability=True       |
+| Model              | Train Time | Train Accuracy | Test Accuracy | Precision Score | Recall Score | F1 Score | Best Score | Best Params |
+|--------------------|------------|----------------|----------------|------------------|--------------|----------|------------|-------------|
+| LogisticRegression | 6.99       | 0.9103         | 0.9154         | 0.7052           | 0.4278       | 0.5325   | 0.9092     | `LogisticRegression(C=0.1, max_iter=1000, random_state=42, solver='liblinear')` |
+| DecisionTree       | 35.96      | 0.9160         | 0.9184         | 0.6773           | 0.5269       | 0.5927   | 0.9119     | `DecisionTreeClassifier(max_depth=5, min_samples_leaf=4, random_state=42)` |
+| KNN                | 183.35     | 1.0000         | 0.9056         | 0.6829           | 0.3017       | 0.4185   | 0.8986     | `KNeighborsClassifier(metric='euclidean', n_neighbors=19, weights='distance')` |
+| SVM                | 456.12     | 0.9149         | 0.8753         | 0.4692           | 0.8114       | 0.5946   | 0.8691     | `SVC(C=5, class_weight='balanced', gamma='auto', probability=True)` |
 
 <h>Improved LogisticRegression model performance metrics<h>
 ![Image](/images/lr_grid_metrics.png)
