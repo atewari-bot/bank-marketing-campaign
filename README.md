@@ -137,6 +137,11 @@ This is the first step of Exploratory Data Analysis (EDA)
 | Precision    | 0.12      | Very low — most positive predictions are incorrect                 |
 | Recall       | 0.12      | Very low — misses nearly all actual positive cases                 |
 
+**Summary:**
+* <b>ROC Curve:</b> The curve for the DummyClassifier likely hugs the diagonal line (the line of no-discrimination). This indicates that the model is performing no better than random chance at distinguishing between the positive and negative classes based on the True Positive Rate and False Positive Rate. The area under the curve (AUC) would be close to 0.5.
+* <b>Precision-Recall Curve:</b> The Precision-Recall curve for the DummyClassifier would likely be a horizontal line at a precision equal to the proportion of the positive class in the dataset. This is because a dummy classifier that predicts based on class distribution won't effectively trade off precision and recall; its precision will remain constant regardless of the recall level.
+* <b>Overall:</b> Both curves for the DummyClassifier demonstrate its inability to build a meaningful model and highlight that any performance metrics (like accuracy) achieved are simply a result of the class distribution in the data, not the model's ability to learn patterns.
+
 ## Model Comparisons
 
 | Model               | Train Time | Train Accuracy | Test Accuracy  | Precision Score  | Recall Score  | F1 Score |
@@ -157,6 +162,10 @@ This is the first step of Exploratory Data Analysis (EDA)
 | Precision    | 0.71      | High — when it says “positive,” it’s usually right       |
 | Recall       | 0.43      | Moderate — misses more than half of positives            |
 
+**Summary:**
+* <b>ROC Curve indicates decent overall discrimination:</b> The ROC curve for the 'Yes' class is above the diagonal line, suggesting the model can distinguish between positive and negative classes better than random chance. The AUC score of 0.94 confirms this, although there's still room for improvement towards a perfect score of 1.0.
+* <b>Precision-Recall Curve suggests moderate performance for the positive class:</b> The Precision-Recall curve for the 'Yes' class shows a trade-off between precision and recall. While the curve is above the baseline (diagonal green line), the shape suggests that achieving high recall might come at the cost of lower precision, which is common with imbalanced datasets. The legend position being in the 'lower right' suggests that the curve is likely closer to the bottom and right of the plot area, indicating that at higher recall values, the precision might drop significantly.
+
 <h>DecisionTreeClassifier model performance metrics<h>
 ![Image](/images/dt_metrics.png)
 
@@ -166,6 +175,10 @@ This is the first step of Exploratory Data Analysis (EDA)
 | Accuracy     | 0.89      | High — most predictions are correct overall                |
 | Precision    | 0.53      | Moderate — half of predicted positives are correct         |
 | Recall       | 0.54      | Moderate — detects just over half of actual positives      |
+
+**Summary:**
+* <b>ROC Curve:</b> The ROC curve shows the model's ability to distinguish between the two classes. A curve that bows towards the top-left corner indicates better performance. The closer the curve is to the top-left, the higher the True Positive Rate is for a given False Positive Rate, indicating a good balance between correctly identifying positive cases and minimizing false alarms.
+* <b>Precision-Recall Curve:</b> The Precision-Recall curve is particularly useful for imbalanced datasets. A curve closer to the top-right corner indicates better performance, signifying high precision and high recall. This means the model is good at both correctly identifying positive instances (high recall) and having a low rate of false positives (high precision).
 
 <h>KNeighborsClassifier model performance metrics<h>
 ![Image](/images/knn_metrics.png)
@@ -177,6 +190,11 @@ This is the first step of Exploratory Data Analysis (EDA)
 | Precision    | 0.60      | Moderate to high — most predicted positives are correct         |
 | Recall       | 0.34      | Low — misses most of the actual positive cases                  |
 
+**Summary:**
+* <b>ROC Curve and AUC:</b> The ROC curve for the "Yes" class is positioned towards the upper-left corner and has an AUC score of approximately 0.74. This indicates that the KNN model has a reasonably good ability to distinguish between the positive class (subscribed to a deposit) and the negative class (did not subscribe), performing better than random chance (AUC of 0.5).
+* <b>Precision-Recall Curve and AUC:</b> The Precision-Recall curve shows the trade-off between precision and recall for the "Yes" class. Its position and shape suggest that achieving high recall (correctly identifying most positive cases) might come at the cost of lower precision (more false positives), which is common in imbalanced datasets like this one.
+* <b>Overall Performance:</b> Considering both curves, the KNeighborsClassifier shows moderate performance in predicting the positive class. The ROC AUC is decent, but the Precision-Recall curve suggests that improving the balance between correctly identifying positive cases and minimizing false positives is important, potentially through different hyperparameters or addressing the class imbalance.
+
 <h>Support Vectors Classifier model performance metrics<h>
 ![Image](/images/svm_metrics.png)
 
@@ -186,6 +204,10 @@ This is the first step of Exploratory Data Analysis (EDA)
 | Accuracy     | 0.90      | High — model correctly predicts most outcomes overall            |
 | Precision    | 0.66      | High — most predicted positives are correct                      |
 | Recall       | 0.19      | Very low — misses the vast majority of actual positive cases     |
+
+**Summary:**
+* <b>ROC Curve (AUC):</b> The ROC curve shows the trade-off between the True Positive Rate (sensitivity) and the False Positive Rate (1-specificity) at various threshold settings. An AUC (Area Under the Curve) score closer to 1 indicates a better performing classifier that can distinguish between positive and negative classes well.
+* <b>Precision-Recall Curve (AUC):</b> The Precision-Recall curve plots the precision against the recall for different thresholds. It is particularly useful for evaluating models on imbalanced datasets, where the ROC curve can be misleading. A higher AUC for the Precision-Recall curve suggests that the model has a good balance between precision and recall.
 
 ## Improving the Model
 
@@ -208,6 +230,11 @@ This is the first step of Exploratory Data Analysis (EDA)
 | Precision    | 0.71      | High — when it says “positive,” it’s usually right       |
 | Recall       | 0.43      | Moderate — misses more than half of positives            |
 
+**Summary:**
+* The ROC curve for the fine-tuned Logistic Regression model is positioned higher and further to the left than the baseline model's ROC curve, indicating a better trade-off between the True Positive Rate and False Positive Rate.
+* The Precision-Recall curve for the fine-tuned model shows improved performance, staying higher for longer across different recall levels compared to the baseline, which suggests better precision (fewer false positives) at various recall levels.
+* Comparing metrics, the fine-tuned Logistic Regression model achieved a better AUC score (Area Under the ROC Curve), indicating overall improved discriminative ability between the positive and negative classes compared to the initial Logistic Regression model.
+
 <h>Improved DecisionTreeClassifier model performance metrics<h>
 ![Image](/images/dt_grid_metrics.png)
 
@@ -221,6 +248,11 @@ This is the first step of Exploratory Data Analysis (EDA)
 | Accuracy     | 0.89               | 0.92               | Accuracy increased — model predicts more outcomes correctly overall           |
 | Recall       | 0.54               | 0.53               | Recall stayed about the same — still detects just over half of positives      |
 | Precision    | 0.53               | 0.68               | Precision improved significantly — positive predictions are now more reliable |
+
+**Summary:**
+* The ROC Curve for the "Yes" class is closer to the top-left corner than the "No" class, indicating better performance in distinguishing the positive class ("Yes") compared to the negative class ("No"). The ROC AUC score of 0.93 is above 0.5, suggesting the model has a reasonable ability to discriminate between the two classes. A higher AUC generally means a better model for this type of task.
+* The Precision-Recall Curve provides insight into the trade-off between precision and recall specifically for the positive class ("Yes"). This curve is particularly useful for imbalanced datasets, like this one, as it focuses on the performance on the minority class. A higher area under the Precision-Recall curve generally indicates better performance, especially when correctly identifying positive instances is crucial.
+* Comparing these curves with the baseline model's curves helps understand the extent of improvement achieved by the Decision Tree model. While the ROC AUC suggests some discriminatory power, the shape of the Precision-Recall curve will reveal how well the model balances precision and recall for predicting term deposit subscriptions.
 
 <h>Improved KNeighborsClassifier model performance metrics<h>
 ![Image](/images/knn_grid_metrics.png)
@@ -237,6 +269,11 @@ This is the first step of Exploratory Data Analysis (EDA)
 | Recall       | 0.34               | 0.30               | Slight decrease — the model detects fewer actual positives                        |
 | Precision    | 0.60               | 0.68               | Noticeable improvement — positive predictions are more reliable now               |
 
+**Summary:**
+* The ROC curve being closer to the top-left corner with an AUC of 0.89 indicates that the KNeighborsClassifier has a moderate ability to distinguish between the positive (deposit 'Yes') and negative (deposit 'No') classes, outperforming a random guess (AUC of 0.5).
+* The Precision-Recall curve shows the trade-off between the precision and recall for the positive class. The shape of this curve provides insights into the model's performance specifically on the minority class ('Yes'), which is important given the imbalanced dataset. A higher area under this curve generally indicates better performance on the positive class.
+* Analyzing both curves together is crucial, especially with an imbalanced dataset. While the ROC curve shows overall discrimination, the Precision-Recall curve offers a more informative view of the model's effectiveness in identifying positive cases.
+
 <h>Improved Support Vectors Classifier model performance metrics<h>
 ![Image](/images/svm_grid_metrics.png)
 
@@ -252,6 +289,10 @@ The updated model represents a dramatic shift in strategy:
 | Recall       | 0.19               | 0.81               | Significant improvement — now detects most actual positives |
 | Precision    | 0.66               | 0.47               | Decreased — more false positives among predicted positives  |
 
+**Summary:**
+* <b>ROC Curve:</b> The ROC curve being closer to the top-left corner indicates that the SVC model generally performs well in distinguishing between the "Yes" (subscribed) and "No" (did not subscribe) classes, with a good balance between True Positive Rate and False Positive Rate. The AUC score provides a single metric for this overall discriminatory power.
+* <b>Precision-Recall Curve:</b> The Precision-Recall curve provides insight into the trade-off between precision and recall for the "Yes" class. A curve that is higher and further to the right indicates better performance, particularly when dealing with imbalanced datasets, showing that the model maintains relatively high precision even as recall increases.
+* <b>Overall:</b> By examining both curves together, we get a more complete picture of the SVC model's performance, understanding both its general ability to separate classes (ROC) and its effectiveness in correctly identifying positive cases while minimizing false positives (Precision-Recall), which is crucial for a marketing campaign objective.
 
 ## Next steps and Recommendations
 
