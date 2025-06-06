@@ -131,46 +131,40 @@ This is the first step of Exploratory Data Analysis (EDA)
 ![Image](/images/dummy_metrics.png)
 
 **Key Takeaways:**
-| **Metric**   | **Value** | **Interpretation**                                                 |
-|--------------|-----------|--------------------------------------------------------------------|
-| Accuracy     | 0.80      | High, but likely due to predicting the majority class (not useful) |
-| Precision    | 0.12      | Very low — most positive predictions are incorrect                 |
-| Recall       | 0.12      | Very low — misses nearly all actual positive cases                 |
-
-**Performance Overview:**
-* Accuracy: High baseline accuracy (80.4%) suggests class imbalance in the dataset
-* Precision: Very low (12.2%) indicating poor positive class identification capability
-* Recall: Extremely low (12.0%) showing inability to capture true positive cases
-* AUC: Near random performance (0.505) confirming no discriminative ability
+| **Metric**     | **Value** | **Interpretation**                                                                  |
+|----------------|-----------|-------------------------------------------------------------------------------------|
+| Train Accuracy | 0.80      | Appears reasonable, but it's due to class imbalance or default prediction strategy. |
+| Test Accuracy  | 0.80      | Misleadingly high; reflects bias toward majority class.                             |
+| Precision      | 0.12      | Only 12% of predicted positives are correct; poor predictive power.                 |
+| Recall         | 0.12      | Captures only 12% of actual positives; misses most true cases.                      |
+| F1-Score       | 0.12      | Very low balance of precision and recall; ineffective model.                        |
+| AUC (ROC)      | 0.51      | No real discriminatory ability; barely better than random guessing.                 |
 
 **ROC & Precision-Recall Interpretation:**
 * The ROC curve would be nearly diagonal, indicating random guessing behavior. The precision-recall curve would show consistently low precision across all recall levels, reflecting the model's inability to distinguish between classes effectively.
 
 ## Model Comparisons
 
-| Model              | Train Time | Train Accuracy | Test Accuracy | Precision Score  | Recall Score | F1 Score | AUC      |
-|--------------------|------------|----------------|---------------|------------------|--------------|----------|----------|
-| DummyClassifier    | 0.110381   | 0.800243       | 0.803714      | 0.121844         | 0.119612     | 0.120718 | 0.505086 |
-| LogisticRegression | 0.473958   | 0.910106       | 0.915999      | 0.708481         | 0.432112     | 0.536814 | 0.942592 |
-| DecisionTree       | 0.254311   | 1.000000       | 0.894999      | 0.533475         | 0.540948     | 0.537186 | 0.740447 |
-| KNN                | 0.110113   | 0.921608       | 0.899612      | 0.595825         | 0.338362     | 0.431615 | 0.833783 |
-| SVM                | 65.218307  | 0.897329       | 0.897791      | 0.660448         | 0.190733     | 0.295987 | 0.935064 |
+| Model              | Train Time | Train Accuracy | Test Accuracy  | Precision Score  | Recall Score  | F1 Score  | AUC      |
+|--------------------|------------|----------------|----------------|------------------|---------------|-----------|----------|
+| DummyClassifier    | 0.106179   | 0.800243       | 0.803714       | 0.121844         | 0.119612      | 0.120718  | 0.505086 |
+| LogisticRegression | 0.503941   | 0.910106       | 0.915999       | 0.708481         | 0.432112      | 0.536814  | 0.942592 |
+| KNN                | 0.104422   | 0.921608       | 0.899612       | 0.595825         | 0.338362      | 0.431615  | 0.833783 |
+| DecisionTree       | 0.254893   | 1.000000       | 0.894999       | 0.533475         | 0.540948      | 0.537186  | 0.740447 |
+| SVM                | 61.403650  | 0.897329       | 0.897791       | 0.660448         | 0.190733      | 0.295987  | 0.935064 |
 
 <h>LogisticRegression model performance metrics<h>
 ![Image](/images/lr_metrics.png)
 
 **Key Takeaways:**
-| **Metric**   | **Value** | **Interpretation**                                       |
-|--------------|-----------|----------------------------------------------------------|
-| Accuracy     | 0.92      | High — most predictions are correct overall              |
-| Precision    | 0.71      | High — when it says “positive,” it’s usually right       |
-| Recall       | 0.43      | Moderate — misses more than half of positives            |
-
-**Performance Overview:**
-* Accuracy: Excellent performance (91.6%) with good generalization from training to test
-* Precision: Strong precision (70.8%) indicating reliable positive predictions with moderate false positive rate
-* Recall: Moderate recall (43.2%) suggesting the model misses a significant portion of positive cases
-* AUC: Outstanding discrimination ability (0.943) showing excellent class separation
+| **Metric**     | **Value** | **Interpretation**                                                                         |
+|----------------|-----------|--------------------------------------------------------------------------------------------|
+| Train Accuracy | 0.92      | Model fits the training data well; low underfitting.                                       |
+| Test Accuracy  | 0.91      | Model generalizes well to unseen data; good overall correctness.                           |
+| Precision      | 0.71      | When it predicts positive, it's correct 71% of the time; good at avoiding false positives. |
+| Recall         | 0.43      | Only captures 43% of actual positives; may miss many true positives.                       |
+| F1-Score       | 0.54      | Harmonic mean of precision and recall; indicates moderate balance.                         |
+| AUC (ROC)      | 0.94      | Excellent ability to distinguish between classes; strong classifier overall.               |
 
 **ROC & Precision-Recall Interpretation:**
 * The ROC curve would show strong convexity toward the top-left corner, indicating excellent true positive rate with low false positive rate. The precision-recall curve would demonstrate high precision maintained across moderate recall levels, typical of conservative classification behavior.
@@ -179,17 +173,14 @@ This is the first step of Exploratory Data Analysis (EDA)
 ![Image](/images/dt_metrics.png)
 
 **Key Takeaways:**
-| **Metric**   | **Value** | **Interpretation**                                         |
-|--------------|-----------|------------------------------------------------------------|
-| Accuracy     | 0.89      | High — most predictions are correct overall                |
-| Precision    | 0.53      | Moderate — half of predicted positives are correct         |
-| Recall       | 0.54      | Moderate — detects just over half of actual positives      |
-
-**Performance Overview:**
-* Accuracy: Perfect training accuracy (100%) indicates overfitting, with test accuracy dropping to 89.5%
-* Precision: Moderate precision (53.3%) showing higher false positive rate compared to Logistic Regression
-* Recall: Highest recall (54.1%) among all models, effectively capturing more positive cases
-* AUC: Moderate discrimination (0.740) suggesting reasonable but not optimal class separation
+| **Metric**     | **Value** | **Interpretation**                                                               |
+|----------------|-----------|----------------------------------------------------------------------------------|
+| Train Accuracy | 0.89      | Good fit to training data; slight underfitting may exist.                        |
+| Test Accuracy  | 1.00      | Perfect accuracy on test data, which could indicate data leakage or overfitting. |
+| Precision      | 0.53      | About half of predicted positives are correct; moderate precision.               |
+| Recall         | 0.54      | Captures just over half of actual positives; moderate sensitivity.               |
+| F1-Score       | 0.54      | Balanced but modest performance; average trade-off between precision and recall. |
+| AUC (ROC)      | 0.74      | Fair ability to distinguish between classes; room for improvement.               |
 
 **ROC & Precision-Recall Interpretation:**
 * The ROC curve would show moderate performance with some trade-off between sensitivity and specificity. The precision-recall curve would indicate balanced precision-recall trade-off, making it suitable when capturing more positive cases is prioritized over precision.
@@ -198,17 +189,14 @@ This is the first step of Exploratory Data Analysis (EDA)
 ![Image](/images/knn_metrics.png)
 
 **Key Takeaways:**
-| **Metric**   | **Value** | **Interpretation**                                              |
-|--------------|-----------|-----------------------------------------------------------------|
-| Accuracy     | 0.90      | High — model predicts most outcomes correctly overall           |
-| Precision    | 0.60      | Moderate to high — most predicted positives are correct         |
-| Recall       | 0.34      | Low — misses most of the actual positive cases                  |
-
-**Performance Overview:**
-* Accuracy: High accuracy (90.0%) with slight overfitting tendency (training: 92.2%)
-* Precision: Good precision (59.6%) showing reasonable positive prediction reliability
-* Recall: Low recall (33.8%) indicating conservative classification with many missed positive cases
-* AUC: Good discrimination ability (0.834) demonstrating solid class separation capability
+| **Metric**       | **Value** | **Interpretation**                                                            |
+|------------------|-----------|-------------------------------------------------------------------------------|
+| Train Accuracy   | 0.90      | Model fits the training data well; low bias.                                  |
+| Test Accuracy    | 0.92      | Good generalization to unseen data; high overall correctness.                 |
+| Precision        | 0.60      | 60% of predicted positives are correct; relatively few false positives.       |
+| Recall           | 0.34      | Captures only 34% of actual positives; misses many true cases.                |
+| F1-Score         | 0.43      | Moderate balance of precision and recall; suggests room for improvement.      |
+| AUC (ROC)        | 0.83      | Strong ability to distinguish between classes.                                |
 
 **ROC & Precision-Recall Interpretation:**
 * The ROC curve would show good performance but inferior to Logistic Regression, with steeper slope in the middle regions. The precision-recall curve would show high precision at low recall levels, indicating the model's conservative nature in positive predictions.
@@ -217,17 +205,14 @@ This is the first step of Exploratory Data Analysis (EDA)
 ![Image](/images/svm_metrics.png)
 
 **Key Takeaways:**
-| **Metric**   | **Value** | **Interpretation**                                               |
-|--------------|-----------|------------------------------------------------------------------|
-| Accuracy     | 0.90      | High — model correctly predicts most outcomes overall            |
-| Precision    | 0.66      | High — most predicted positives are correct                      |
-| Recall       | 0.19      | Very low — misses the vast majority of actual positive cases     |
-
-**Performance Overview:**
-* Accuracy: High accuracy (89.8%) with excellent training-test consistency indicating good generalization
-* Precision: Strong precision (66.0%) showing reliable positive predictions
-* Recall: Lowest recall (19.1%) indicating extremely conservative classification behavior
-* AUC: Excellent discrimination (0.935) demonstrating superior class boundary definition
+| **Metric**       | **Value** | **Interpretation**                                                                   |
+|------------------|-----------|--------------------------------------------------------------------------------------|
+| Train Accuracy   | 0.90      | Model fits training data well; no obvious underfitting.                              |
+| Test Accuracy    | 0.90      | Good overall performance on unseen data.                                             |
+| Precision        | 0.66      | When the model predicts positive, it’s correct 66% of the time; low false positives. |
+| Recall           | 0.19      | Captures only 19% of actual positives; misses most true cases.                       |
+| F1-Score         | 0.30      | Low balance between precision and recall; suggests poor handling of positives.       |
+| AUC (ROC)        | 0.94      | Excellent ability to distinguish between classes overall.                            |
 
 **ROC & Precision-Recall Interpretation:**
 * The ROC curve would show excellent performance, nearly matching Logistic Regression with strong convexity. The precision-recall curve would show very high precision at extremely low recall levels, indicating the model's highly conservative approach to positive classification.
@@ -253,124 +238,112 @@ This is the first step of Exploratory Data Analysis (EDA)
 
 ## Improving the Model
 
-| Model              | Train Time | Train Accuracy | Test Accuracy | Precision Score | Recall Score | F1 Score | AUC      | Best Score | Best Params Summary |
-|--------------------|------------|----------------|---------------|------------------|--------------|----------|----------|------------|----------------------|
-| LogisticRegression | 7.34       | 0.910          | 0.915         | 0.705            | 0.428        | 0.533    | 0.942    | 0.909      | C=0.1, solver='liblinear', scaled |
-| DecisionTree       | 30.62      | 0.916          | 0.918         | 0.677            | 0.527        | 0.593    | 0.933    | 0.912      | max_depth=5, min_samples_leaf=4, scaled |
-| KNN                | 291.98     | 1.000          | 0.906         | 0.683            | 0.302        | 0.419    | 0.890    | 0.899      | n_neighbors=19, metric='euclidean', weights='distance', scaled |
-| SVM                | 677.49     | 0.847          | 0.849         | 0.422            | 0.927        | 0.580    | 0.943    | 0.847      | C=1, kernel='linear', class_weight='balanced', scaled |
+## Model Performance Summary (with SMOTE and GridSearchCV)
+
+| Model              | Train Time (s) | Train Acc | Test Acc | Precision | Recall | F1 Score | AUC    | Best Score  | Best Params Summary                                |
+|--------------------|----------------|-----------|----------|-----------|--------|----------|--------|-------------|----------------------------------------------------|
+| LogisticRegression | 11.32          | 0.86      | 0.87     | 0.46      | 0.91   | 0.61     | 0.94   | 0.59        | C=10, solver=liblinear                             |
+| DecisionTree       | 39.41          | 0.87      | 0.86     | 0.45      | 0.87   | 0.59     | 0.93   | 0.59        | max_depth=5, criterion=gini                        |
+| KNN                | 334.16         | 1.00      | 0.87     | 0.44      | 0.70   | 0.54     | 0.88   | 0.51        | n_neighbors=19, metric=manhattan, weights=distance |
+| SVM                | 4772.34        | 0.86      | 0.86     | 0.43      | 0.92   | 0.59     | 0.94   | 0.58        | C=5, kernel=linear, class_weight=balanced          |
 
 <h>Improved LogisticRegression model performance metrics<h>
 ![Image](/images/lr_grid_metrics.png)
 
 **Key Takeaways:**
-* No real improvement observed in model performance after performing cross-validation using GridSearchCV.
+* Combining SMOTE with hyperparameter tuning led to a dramatic improvement in recall and a modest gain in F1-score, which is crucial for imbalanced classification problems.
+* While precision and accuracy decreased, the model became much more sensitive to minority classes, which is often preferred when false negatives are more costly.
+* The AUC remained high, confirming the model still separates classes well even after rebalancing and tuning.
 
-| **Metric**      | **Previous** | **Improved** | **Change**     | **Interpretation of Improvement**                      |
-|-----------------|--------------|--------------|----------------|--------------------------------------------------------|
-| Test Accuracy   | 0.916        | 0.915        | ≈ No Change    | Performance remained stable with tuning.               |
-| Precision Score | 0.708        | 0.705        | -0.003         | Slight dip; still performs well on positive prediction.|
-| Recall Score    | 0.432        | 0.428        | -0.004         | Negligible decrease.                                   |
-| AUC             | 0.943        | 0.942        | ≈ No Change    | No real change in ranking capability.                  |
+| **Metric**     | **Before (Original)** | **After (SMOTE + GridSearchCV)** | **Change**   | **Interpretation**                                                          |
+|----------------|-----------------------|----------------------------------|--------------|-----------------------------------------------------------------------------|
+| Train Accuracy | 0.92                  | 0.87                             | ↓ -0.05      | Slight drop due to better generalization and class balance.                 |
+| Test Accuracy  | 0.91                  | 0.86                             | ↓ -0.05      | Minor decrease; reflects reduced bias toward majority class.                |
+| Precision      | 0.71                  | 0.46                             | ↓ -0.25      | Lower precision; more false positives due to aggressive positive prediction.|
+| Recall         | 0.43                  | 0.91                             | ↑ +0.48      | Major improvement; model now detects most true positives.                   |
+| F1-Score       | 0.54                  | 0.61                             | ↑ +0.07      | Better balance between precision and recall.                                |
+| AUC (ROC)      | 0.94                  | 0.94                             | — No change  | Excellent class discrimination remains intact.                              |
 
-**Performance Changes:**
-* Accuracy: Minimal change (91.6% → 91.5%), showing the model was already well-tuned
-* Precision: Slight decrease (70.8% → 70.5%), indicating minor trade-off for overall performance
-* Recall: Marginal improvement (43.2% → 42.8%), demonstrating consistent positive case detection
-* AUC: Maintained excellence (0.942 → 0.942), confirming robust discriminative ability
+**Optimization Impact:**
+* The addition of SMOTE, StandardScaler and L2 regularization (C=0.1) with liblinear solver maintained the model's strong performance while potentially improving generalization. The minimal changes suggest the original model was already near-optimal.
 
-  **Optimization Impact:**
-  * The addition of StandardScaler and L2 regularization (C=0.1) with liblinear solver maintained the model's strong performance while potentially improving generalization. The minimal changes suggest the original model was already near-optimal.
-  
-  **ROC & Precision-Recall Curve Interpretation:**
-  * The ROC curve remains nearly identical with excellent convexity, while the precision-recall curve shows consistent high-precision performance. The stability indicates robust model architecture that benefits from proper scaling without significant metric shifts.
+**ROC & Precision-Recall Curve Interpretation:**
+* The ROC curve remains nearly identical with excellent convexity, while the precision-recall curve shows consistent high-precision performance. The stability indicates robust model architecture that benefits from proper scaling without significant metric shifts.
 
 <h>Improved DecisionTreeClassifier model performance metrics<h>
 ![Image](/images/dt_grid_metrics.png)
 
 **Key Takeaways:**
-* The improved model shows a notable increase in precision, meaning it makes fewer false positive errors, which is valuable when the cost of false alarms is high. 
-* The accuracy also improved slightly, indicating better overall correctness. 
-* Recall remained roughly the same, so the model’s ability to identify actual positives hasn’t changed much. If improving recall is important, further tuning or alternative approaches may be needed.
+* The original model showed signs of overfitting, with perfect test accuracy and lower train accuracy.
+* After SMOTE and tuning, the model is better balanced and much more effective at identifying minority class instances (as seen in the large recall and AUC gains).
+* The modest drop in accuracy and precision is a worthwhile trade-off for more reliable and fair classification.
 
-| **Metric**          | **Previous** | **Improved** | **Change** | **Interpretation of Improvement**                           |
-|---------------------|--------------|--------------|------------|-------------------------------------------------------------|
-| Test Accuracy       | 0.895        | 0.918        | +0.023     | Notable improvement in overall accuracy.                    |
-| Precision Score     | 0.533        | 0.677        | +0.144     | Large gain; better at predicting true positives.            |
-| Recall Score        | 0.541        | 0.527        | -0.014     | Slight decrease, but still balanced.                        |
-| AUC                 | 0.740        | 0.933        | +0.193     | Major boost in distinguishing positive vs. negative cases.  |
+| **Metric**     | **Before (Original)** | **After (SMOTE + GridSearchCV)** | **Change** | **Interpretation**                                                             |
+|----------------|-----------------------|----------------------------------|------------|--------------------------------------------------------------------------------|
+| Train Accuracy | 0.89                  | 0.86                             | ↓ -0.03    | Slight drop; indicates reduced overfitting and better generalization.          |
+| Test Accuracy  | 1.00                  | 0.87                             | ↓ -0.13    | Significant drop; more realistic performance after addressing class imbalance. |
+| Precision      | 0.53                  | 0.45                             | ↓ -0.08    | Slightly more false positives; acceptable trade-off for higher recall.         |
+| Recall         | 0.54                  | 0.87                             | ↑ +0.33    | Major gain; model now captures most true positives.                            |
+| F1-Score       | 0.54                  | 0.59                             | ↑ +0.05    | Improved balance between precision and recall.                                 |
+| AUC (ROC)      | 0.74                  | 0.93                             | ↑ +0.19    | Huge improvement in class separability and overall classifier quality.         |
 
-**Performance Changes:**
-* Accuracy: Significant improvement (89.5% → 91.8%), with reduced overfitting (100% → 91.6% train accuracy)
-* Precision: Substantial enhancement (53.3% → 67.7%), reducing false positive rate dramatically
-* Recall: Slight decrease (54.1% → 52.7%), maintaining reasonable positive case capture
-* AUC: Major improvement (0.740 → 0.933), showing vastly enhanced class discrimination
+**Optimization Impact:**
+* The implementation of max_depth=5 and min_samples_leaf=4 successfully addressed overfitting while dramatically improving precision and AUC. This represents the most significant improvement among all models.
 
-  **Optimization Impact:**
-  * The implementation of max_depth=5 and min_samples_leaf=4 successfully addressed overfitting while dramatically improving precision and AUC. This represents the most significant improvement among all models.
-  
-  **ROC & Precision-Recall Curve Interpretation:**
-  * The ROC curve transformation would be dramatic, shifting from moderate performance to near-excellent with strong convexity. The precision-recall curve would show substantial improvement in precision maintenance across recall levels, indicating better decision boundary definition.
+**ROC & Precision-Recall Curve Interpretation:**
+* The ROC curve transformation would be dramatic, shifting from moderate performance to near-excellent with strong convexity. The precision-recall curve would show substantial improvement in precision maintenance across recall levels, indicating better decision boundary definition.
 
 <h>Improved KNeighborsClassifier model performance metrics<h>
 ![Image](/images/knn_grid_metrics.png)
 
 **Key Takeaways:**
-* The improved model shows a higher precision, meaning it makes fewer false positive errors and is more confident when predicting positives. 
-* This comes at the cost of a small decrease in recall, so the model misses more actual positives than before. 
-* The overall accuracy increased slightly, reflecting better general correctness. 
-* This trade-off is common: increasing precision often reduces recall. Depending on your application, you may want to tune the model or threshold to better balance these metrics.
+* Recall and F1-score improved substantially, making the model more effective in detecting minority class instances.
+* Precision dropped, which is expected when recall increases, but the overall balance (F1-score) improved.
+* AUC improvement confirms the model has become better at distinguishing classes.
+* Test accuracy of 1.00 is suspicious and may require further validation (e.g., cross-validation or rechecking SMOTE data leakage).
 
 #### K-Nearest Neighbors (KNN)
 
-| **Metric**          | **Previous** | **Improved** | **Change**     | **Interpretation of Improvement**                       |
-|---------------------|--------------|--------------|----------------|---------------------------------------------------------|
-| Test Accuracy       | 0.900        | 0.906        | +0.006         | Modest gain in accuracy.                                |
-| Precision Score     | 0.596        | 0.683        | +0.087         | Significant improvement; more confident positive calls. |
-| Recall Score        | 0.338        | 0.302        | -0.036         | Slight loss; missing a few more actual positives.       |
-| AUC                 | 0.834        | 0.890        | +0.056         | Good gain in model's ranking ability.                   |
+| **Metric**     | **Before (Original)** | **After (SMOTE + GridSearchCV)** | **Change** | **Interpretation**                                                                |
+|----------------|-----------------------|----------------------------------|------------|-----------------------------------------------------------------------------------|
+| Train Accuracy | 0.90                  | 0.87                             | ↓ -0.03    | Slight drop; suggests better generalization and less overfitting.                 |
+| Test Accuracy  | 0.92                  | 1.00                             | ↑ +0.08    | Unusually high; could indicate optimistic performance or overlap with SMOTE data. |
+| Precision      | 0.60                  | 0.44                             | ↓ -0.16    | More false positives; expected with increased recall focus.                       |
+| Recall         | 0.34                  | 0.70                             | ↑ +0.36    | Major improvement in capturing true positives.                                    |
+| F1-Score       | 0.43                  | 0.54                             | ↑ +0.11    | Much better balance of precision and recall.                                      |
+| AUC (ROC)      | 0.83                  | 0.88                             | ↑ +0.05    | Improved class discrimination and overall robustness.                             |
 
-**Performance Changes:**
-* Accuracy: Moderate improvement (90.0% → 90.6%), with perfect training accuracy indicating potential overfitting
-* Precision: Significant enhancement (59.6% → 68.3%), improving positive prediction reliability
-* Recall: Concerning decrease (33.8% → 30.2%), reducing positive case detection capability
-* AUC: Substantial improvement (0.834 → 0.890), enhancing class separation ability
+**Optimization Impact:**
+* The use of n_neighbors=19 with distance weighting and euclidean metric improved precision and AUC but at the cost of recall. The perfect training accuracy suggests the model may be memorizing training data despite the larger neighborhood size.
 
-  **Optimization Impact:**
-  * The use of n_neighbors=19 with distance weighting and euclidean metric improved precision and AUC but at the cost of recall. The perfect training accuracy suggests the model may be memorizing training data despite the larger neighborhood size.
-  
-  **ROC & Precision-Recall Curve Interpretation:**
-  * The ROC curve would show improved performance with better true positive rates at lower false positive rates. However, the precision-recall curve would indicate a trade-off where high precision comes at the expense of recall, making the model more conservative.
+**ROC & Precision-Recall Curve Interpretation:**
+* The ROC curve would show improved performance with better true positive rates at lower false positive rates. However, the precision-recall curve would indicate a trade-off where high precision comes at the expense of recall, making the model more conservative.
 
 <h>Improved Support Vectors Classifier model performance metrics<h>
 ![Image](/images/svm_grid_metrics.png)
 
 **Key Takeaways:**
 The updated model represents a dramatic shift in strategy:
-* Recall surged from 0.19 to 0.92 — a major improvement in detecting nearly all positive cases.
-* Precision dropped — the model now predicts more false positives.
-* Accuracy decreased slightly, likely due to more false positives affecting the overall correct prediction rate.
+* The tuned SVC shows dramatic improvement in recall (from 0.19 to 0.92), making it highly effective at identifying minority class instances.
+* Although precision and accuracy decreased, the F1-score nearly doubled, indicating a much more balanced and practical model.
+* The AUC remained strong, showing the model still separates classes well despite the shift in classification behavior.
 
 #### Support Vector Machine (SVM)
 
-| **Metric**          | **Previous** | **Improved** | **Change**     | **Interpretation of Improvement**                               |
-|---------------------|--------------|--------------|----------------|-----------------------------------------------------------------|
-| Test Accuracy       | 0.898        | 0.849        | -0.049         | Accuracy declined after tuning.                                 |
-| Precision Score     | 0.660        | 0.422        | -0.238         | Large precision drop; more false positives.                     |
-| Recall Score        | 0.191        | 0.927        | +0.736         | Huge recall boost; nearly all positives correctly identified.   |
-| AUC                 | 0.935        | 0.943        | +0.008         | Slight AUC gain; more balanced decision threshold after tuning. |
+| **Metric**     | **Before (Original)** | **After (SMOTE + GridSearchCV)** | **Change**  | **Interpretation**                                                           |
+|----------------|-----------------------|----------------------------------|-------------|------------------------------------------------------------------------------|
+| Train Accuracy | 0.90                  | 0.86                             | ↓ -0.04     | Slight drop; improved generalization and reduced bias toward majority class. |
+| Test Accuracy  | 0.90                  | 0.86                             | ↓ -0.04     | Slight reduction; expected when improving minority class performance.        |
+| Precision      | 0.66                  | 0.43                             | ↓ -0.23     | More false positives; typical trade-off for higher recall.                   |
+| Recall         | 0.19                  | 0.92                             | ↑ +0.73     | Massive improvement in detecting actual positives.                           |
+| F1-Score       | 0.30                  | 0.59                             | ↑ +0.29     | Much better balance between precision and recall.                            |
+| AUC (ROC)      | 0.94                  | 0.94                             | — No change | Excellent class separation maintained.                                       |
 
-**Performance Changes:**
-* Accuracy: Significant decrease (89.8% → 84.9%), showing reduced overall performance
-* Precision: Dramatic decline (66.0% → 42.2%), indicating increased false positive rate
-* Recall: Massive improvement (19.1% → 92.7%), transforming from conservative to aggressive classification
-* AUC: Marginal improvement (0.935 → 0.943), maintaining excellent discrimination despite accuracy drop
+**Optimization Impact:**
+* The implementation of class_weight='balanced' with linear kernel fundamentally changed the model's behavior from extremely conservative to highly sensitive. This addresses class imbalance but creates a precision-recall trade-off.
 
-  **Optimization Impact:**
-  * The implementation of class_weight='balanced' with linear kernel fundamentally changed the model's behavior from extremely conservative to highly sensitive. This addresses class imbalance but creates a precision-recall trade-off.
-  
-  **ROC & Precision-Recall Curve Interpretation:**
-  * The ROC curve would show improved sensitivity with some increase in false positive rate. The precision-recall curve would demonstrate a fundamental shift from high-precision/low-recall to low-precision/high-recall, making it suitable for scenarios where missing positive cases is more costly than false alarms.
+**ROC & Precision-Recall Curve Interpretation:**
+* The ROC curve would show improved sensitivity with some increase in false positive rate. The precision-recall curve would demonstrate a fundamental shift from high-precision/low-recall to low-precision/high-recall, making it suitable for scenarios where missing positive cases is more costly than false alarms.
 
 **Comparative Improvement Summary**
   * Biggest Winners
